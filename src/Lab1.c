@@ -98,6 +98,8 @@ uint32_t sqrt32(uint32_t s);
 
 //---------------- Global variables shared between tasks ----------------
 uint32_t Time;              // elasped time in seconds
+uint32_t counter_100ms;
+uint32_t counter_1000ms;
 uint32_t Steps;             // number of steps counted
 uint32_t Magnitude;         // will not overflow (3*1,023^2 = 3,139,587)
                             // Exponentially Weighted Moving Average
@@ -504,8 +506,8 @@ int main(void) {
     Profile_Init();     // initialize the 7 hardware profiling pins
 
     // change 1000 to 4-digit number from edX
-    TExaS_Init(GRADER, 1000 );          // initialize the Lab 1 grader
-    // TExaS_Init(LOGICANALYZER, 1000);    // initialize the Lab 1 logic analyzer
+    // TExaS_Init(GRADER, 1571);          // initialize the Lab 1 grader
+    TExaS_Init(LOGICANALYZER, 1571);    // initialize the Lab 1 logic analyzer
 
     Task0_Init();    // microphone init
     Task1_Init();    // accelerometer init
@@ -513,22 +515,31 @@ int main(void) {
     Task3_Init();    // buttons init
     Task4_Init();    // LCD graphics init
     Task5_Init();    // LCD text init
-    Time = 0;
+    counter_100ms = 0;
+    counter_1000ms = 0;
     EnableInterrupts(); // interrupts needed for grader to run
 
     while(1) {
-        for (int i = 0; i < 10; i++) {  // runs at about 10 Hz
-            Task0();  // sample microphone
+
+        Task0();  // sample microphone, run at about 1000Hz
+
+        if (counter_100ms > 100) {      // runs at about 10Hz
             Task1();  // sample accelerometer
             Task3();  // check the buttons and change mode if pressed
             Task4();  // update the plot
-            BSP_Delay1ms(100);
+            counter_100ms = 0;
         }
 
-        Task2();   // sample light at 1 Hz
-        Task5();   // update the LCD text at 1 Hz
+        if (counter_1000ms > 1000) {    //runs at about 1Hz
+            Task2();   // sample light
+            Task5();   // update the LCD text
+            counter_1000ms = 0;
+        }
 
-        Time++;    // 1 Hz
+        BSP_Delay1ms(1);
+        counter_100ms++;
+        counter_1000ms++;
+
         Profile_Toggle6();
     }
 }
