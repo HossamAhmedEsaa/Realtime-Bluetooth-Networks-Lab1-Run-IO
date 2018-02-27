@@ -98,6 +98,7 @@ uint32_t sqrt32(uint32_t s);
 
 //---------------- Global variables shared between tasks ----------------
 uint32_t Time;              // elasped time in seconds
+uint32_t counter_1ms;
 uint32_t counter_100ms;
 uint32_t counter_1000ms;
 uint32_t Steps;             // number of steps counted
@@ -515,8 +516,12 @@ int main(void) {
     Task3_Init();    // buttons init
     Task4_Init();    // LCD graphics init
     Task5_Init();    // LCD text init
+
+    Time = 0;
+    counter_1ms = 0;
     counter_100ms = 0;
     counter_1000ms = 0;
+
     EnableInterrupts(); // interrupts needed for grader to run
 
     while(1) {
@@ -537,8 +542,14 @@ int main(void) {
         }
 
         BSP_Delay1ms(1);
+        counter_1ms++;
         counter_100ms++;
         counter_1000ms++;
+
+        if (counter_1ms >= 1000) {  // keep tracking of Time in seconds
+            Time++;
+            counter_1ms = 0;
+        }
 
         Profile_Toggle6();
     }
