@@ -26,7 +26,12 @@ The two hardware devices are required for this lab. Unfortunately, the TM4C123 L
 
 - LaunchPad drivers
 
-Detailed installation instruction can be found [HERE][link1].
+Complete installation instruction can be found [HERE][link1].
+
+This [slide][link2] shows how to download and install Keil uVision IDE v5.2. Go to [https://www.keil.com/demo/eval/arm.htm][link3] and fill out the form with your information and device information as TI Cortex-M4. Download **mdk521A.exe** and install it at some place which is easy to find, such as **C:\Keil**.
+
 
 [//]: # (References)
 [link1]: http://edx-org-utaustinx.s3.amazonaws.com/UT601x/RTOSdownload.html "SW Installation Instruction"
+[link2]: http://edx-org-utaustinx.s3.amazonaws.com/UT601x/RTOSKeilInstall.htm "Keil 5.2 Installation"
+[link3]: https://www.keil.com/demo/eval/arm.htm "Register Keil"
