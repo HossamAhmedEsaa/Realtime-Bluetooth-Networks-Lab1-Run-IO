@@ -42,9 +42,48 @@ Download TExaS for Lab 1, 2, 3, 4, 5 [HERE][link4]. Download TExaS for Lab 6 [HE
 
 After installing Keil and TExaS, you will need to install Windows 7 drivers for the TM4C123 LaunchPad. Detailed instruction is [HERE][link6].
 
+## Run the Project
+
+Clone this repository into **C:\Keil\TM4C123Valvanoware** folder and open Lab1 project in Keil.
+
+In the main task of *Lab1.c*, tasks run at their scheduled rates.
+
+| Task        | Function                | Rate (Hz) |
+| :---------- | :---------------------- | :-------- |
+| Task0       | Sample microphone       | 1000      |
+| Task1       | Sample accelerometer    | 10        |
+| Task2       | Sample light            | 1         |
+| Task3       | Check button            | 10        |
+| Task4       | Update plot on LCD      | 10        |
+| Task5       | Update text on LCD      | 1         |
+
+*TExaSdisplay*, which is in the **C:\Keil\TM4C123Valvanoware** folder as well, can be used as a logic analyzer or the grader of lab project. Accordingly, in the main task of Lab1.c, **TExaS_Init()** will be **GRADER** or **LOGICANALYZER**.
+
+```c
+int main(void) {
+    ...
+    // TExaS_Init(GRADER, 1571);
+    TExaS_Init(LOGICANALYZER, 1571);
+    ...
+```
+
+Open the TExaSdisplay, click the *Open* button on the Toolbar to connect with  LauchPad's serial port. Switching to *Text Display* or *Logic* on Toolbar depends on how you initialize TExaS in the project above.
+
+#### Task Execution Profile
+
+Task profile is clearly shown on the logic analyzer. Notice that software toggles the pin every time as the task runs. Therefore, a logic analzyer frequency is half of the real task frequency, i.e. a 500 Hz squarewave means the task executes at 1000 Hz rate.
+
+![Task Execution Rates][image1]
+
+#### Lab 1 Grade
+
+The time unit of Grader report is microsecond (usec). **min** is the minimum time and **max** is the maximum time between two consecutive executions of a task. **jitter** equals that **max** minus **min**. **ave** is the average period of a task. **error** is a deviation of **ave** from **Expected** in percentage.
+
+![Lab Grades][image2]
+
 ## Demostration
 
-In the demostration, ***Time*** counts every second. Accelerometer measures the rotation of the device and adds to ***Step***. Microphone performs the environmental ***Sound*** measuring. Tilting light sensor towards the light source or shading the sensor by a finger changes the ***Light*** intensity measured. Switching between different mode by pushing the button.
+On the LCD display, ***Time*** counts every second. Accelerometer measures the rotation of the device and adds to ***Step***. Microphone performs the environmental ***Sound*** measuring. Tilting light sensor towards the light source or shading the sensor by a finger changes the ***Light*** intensity measured. Switching between different mode by pushing the button.
 
 ![Lab 1 Demo Video][gif1]
 
@@ -57,4 +96,6 @@ In the demostration, ***Time*** counts every second. Accelerometer measures the 
 [link4]: http://edx-org-utaustinx.s3.amazonaws.com/UT601x/RTBN_Install.exe "TExaS Download Part 1"
 [link5]: http://edx-org-utaustinx.s3.amazonaws.com/UT601x/RTBN_Installpart2.exe "TExaS Download Part 2"
 [link6]: http://edx-org-utaustinx.s3.amazonaws.com/UT601x/InstallDrivers7.htm "LaunchPad Drivers Installation"
+[image1]: examples/tasks-execution-logic-analyzer-view.JPG "Task Execution Rates"
+[image2]: examples/tasks-execution-grader-view.JPG "Lab Grades"
 [gif1]: examples/lab-1-demo.gif "Lab 1 Demo Video"
