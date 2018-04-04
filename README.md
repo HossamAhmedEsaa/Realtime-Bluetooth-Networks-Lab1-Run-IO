@@ -1,6 +1,6 @@
 # Realtime-Bluetooth-Networks-Lab1-Run-IO
 
-Lab 1 of *UTAustinX: UT.RTBN.12.01x Realtime Bluetooth Networks* at the open online course platform *edX* targets on experiencing the task management without interrupts or RTOS. The course was created by Dr. Jonathan Valvano and Dr. Ramesh Yerraballi at the University of Texas at Austin.
+Lab 1 of [*UTAustinX: UT.RTBN.12.01x Realtime Bluetooth Networks*][link0] at the open online course platform *edX* targets on experiencing the task management without interrupts or RTOS. The course was created by Dr. Jonathan Valvano and Dr. Ramesh Yerraballi at the University of Texas at Austin.
 
 ## Objectives
 
@@ -90,6 +90,7 @@ On the LCD display, ***Time*** counts every second. Accelerometer measures the r
 
 
 [//]: # (References)
+[link0]: https://www.edx.org/course/real-time-bluetooth-networks-shape-world-utaustinx-ut-rtbn-12-01x-0 "Course Homepage"
 [link1]: http://edx-org-utaustinx.s3.amazonaws.com/UT601x/RTOSdownload.html "SW Installation Instruction"
 [link2]: http://edx-org-utaustinx.s3.amazonaws.com/UT601x/RTOSKeilInstall.htm "Keil 5.2 Installation"
 [link3]: https://www.keil.com/demo/eval/arm.htm "Register Keil"
